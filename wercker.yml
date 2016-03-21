@@ -1,0 +1,10 @@
+box: python:2.7
+no-response-timeout: 15
+build:
+  steps:
+    - capgemini/terraform-install:
+        version: 0.6.12
+    - script:
+        name: terraform validate
+        code: |
+          find docker/ -type d \( -path .terraform \) -prune -exec sh -c '(cd {} && terraform validate)' ';'
