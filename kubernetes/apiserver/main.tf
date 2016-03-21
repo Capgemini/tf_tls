@@ -30,7 +30,7 @@ resource "tls_cert_request" "apiserver" {
   ]
   ip_addresses = [
     "${var.kube_service_ip}",
-    "${element(split(\",\", var.ip_addresses), count.index)}"
+    "${element(var.ip_addresses, count.index)}"
   ]
 }
 

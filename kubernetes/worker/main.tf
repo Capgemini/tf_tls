@@ -25,7 +25,7 @@ resource "tls_cert_request" "worker" {
     "*.*.cluster.internal",
     "*.ec2.internal", # ec2 only
   ]
-  ip_addresses = ["${element(split(\",\", var.ip_addresses), count.index)}"]
+  ip_addresses = ["${element(var.ip_addresses, count.index)}"]
 }
 
 resource "tls_locally_signed_cert" "worker" {

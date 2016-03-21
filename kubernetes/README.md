@@ -1,4 +1,4 @@
-Kubernetes TLA terraform module
+Kubernetes TLS terraform module
 =======================
 
 A terraform module with contains TLS certificates for Kubernetes master, worker
