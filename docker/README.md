@@ -57,3 +57,10 @@ module "docker_client_certs" {
 }
 ```
 
+Assuming you docker daemon is configured to use the certificates ```--tlsverify --tlscacert=/etc/docker/ca.pem --tlscert=/etc/docker/server.pem --tlskey=/etc/docker/server-key.pem```, you can test it from on of the clients by running:
+
+```
+export DOCKER_HOST=tcp://$HOST:2376 DOCKER_TLS_VERIFY=1
+docker ps
+```
+
