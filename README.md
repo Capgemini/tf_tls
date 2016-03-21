@@ -5,6 +5,8 @@ A Terraform module which contains a number of common configurations for TLS cert
 
 TLS Catalog
 ------------
+- [ca](https://github.com/Capgemini/tf_tls/tree/master/ca)
+    - Self signed CA to locally sign TLS certs.
 - [docker](https://github.com/Capgemini/tf_tls/tree/master/docker)
     - TLS certs for Docker daemon and client
 - [kubernetes](https://github.com/Capgemini/tf_tls/tree/master/kubernetes)
