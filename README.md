@@ -11,7 +11,8 @@ TLS Catalog
     - TLS certs for Docker daemon and client
 - [kubernetes](https://github.com/Capgemini/tf_tls/tree/master/kubernetes)
     - TLS certs for APIserver, worker and admin key
-
+- [etcd](https://github.com/Capgemini/tf_tls/tree/master/etcd)
+    - TLS certs etcd
 
 Usage
 ------
