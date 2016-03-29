@@ -17,6 +17,7 @@ resource "null_resource" "configure-apiserver-certs" {
 
   provisioner "remote-exec" {
     inline = [
+      "if [ ! -d /etc/kubernetes/ssl/ ]; then sudo mkdir -m 644 -p /etc/kubernetes/ssl/;fi",
       "echo '${tls_private_key.apiserver.private_key_pem}' | sudo tee /etc/kubernetes/ssl/apiserver-key.pem",
       "echo '${element(tls_locally_signed_cert.apiserver.*.cert_pem, count.index)}' | sudo tee /etc/kubernetes/ssl/apiserver.pem",
       "sudo chmod 600 /etc/kubernetes/ssl/apiserver-key.pem",

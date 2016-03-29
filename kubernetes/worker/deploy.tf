@@ -17,6 +17,7 @@ resource "null_resource" "configure-worker-certs" {
   }
   provisioner "remote-exec" {
     inline = [
+      "if [ ! -d /etc/kubernetes/ssl/ ]; then sudo mkdir -m 644 -p /etc/kubernetes/ssl/;fi",
       "echo '${tls_private_key.worker.private_key_pem}' | sudo tee /etc/kubernetes/ssl/worker-key.pem",
       "echo '${element(tls_locally_signed_cert.worker.*.cert_pem, count.index)}' | sudo tee /etc/kubernetes/ssl/worker.pem",
       "sudo chmod 600 /etc/kubernetes/ssl/worker-key.pem",

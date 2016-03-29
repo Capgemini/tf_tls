@@ -3,7 +3,13 @@ variable "organization" { default = "apollo" }
 variable "validity_period_hours" { default = 240000 }
 variable "early_renewal_hours" { default = 720 }
 variable "is_ca_certificate" { default = true }
+variable "ca_count" {}
+variable "ip_addresses_list" {}
 variable "common_name" { default = "kube-ca" }
+variable "target_folder" { default = "/etc/kubernetes/ssl"}
+variable "user" { default = "core" }
+variable "ssh_user" { default = "core" }
+variable "ssh_private_key" {}
 
 resource "tls_private_key" "ca" {
   algorithm = "RSA"
