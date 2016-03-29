@@ -19,7 +19,9 @@ TLS Catalog
 Usage
 ------
 
-You can use these in your terraform template as in the example below of a Kubernetes cluster on Digitalocean:
+You can refer to the specific readme for every catalog element for checking individual use. 
+
+For a real use case using them all together in a kubernetes cluster on Digitalocean see https://github.com/Capgemini/kubeform/blob/master/terraform/digitalocean/main.tf
 
 ```
 module "ca" {
