@@ -15,21 +15,35 @@ Input Variables
 
 `common_name` - Name for the subject for which a certificate is being requested.
 
+`ca_count` - Number of servers to upload the CA.
+
+`ip_addresses_list` - Host list to upload the CA.
+
+`ssh_user` - User to ssh into the hosts.
+
+`ssh_private_key` - Private key to ssh into the hosts. 
+
+`target_folder` - Folder to upload the the CA.
+
+`user` - User for the target folder.
+
 
 Usage
 -----
 
 ```
 module "ca" {
-  source                = "../certs/ca"
+  source                = "github.com/Capgemini/tf_tls//ca"
   validity_period_hours = 240000
   early_renewal_hours   = 720
   is_ca_certificate     = true
   common_name           = "kube-ca"
   organization          = "Apollo"
+  ca_count          	= "${var.masters + var.workers}"
+  ip_addresses_list     = "${concat(digitalocean_droplet.master.*.ipv4_address, digitalocean_droplet.worker.*.ipv4_address)}"
+  ssh_private_key       = "${tls_private_key.ssh.private_key_pem}"
 }
 ```
-
 
 Outputs
 -------
