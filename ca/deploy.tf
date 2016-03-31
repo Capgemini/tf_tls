@@ -20,8 +20,8 @@ resource "null_resource" "deploy-ca-certs" {
     inline = [
       "if [ ! -d ${var.target_folder} ]; then sudo mkdir -m 644 -p ${var.target_folder};fi",
       "sudo chown ${var.user}:${var.user} ${var.target_folder}",
-      "echo '${tls_self_signed_cert.ca.cert_pem}' | sudo tee /etc/kubernetes/ssl/ca.pem",
-      "sudo chmod 644 /etc/kubernetes/ssl/ca.pem"
+      "echo '${tls_self_signed_cert.ca.cert_pem}' | sudo tee ${var.target_folder}/ca.pem",
+      "sudo chmod 644 ${var.target_folder}/ca.pem"
     ]
   }
 }
