@@ -69,6 +69,7 @@ module "docker_daemon_certs" {
   ca_cert_pem           = "${module.ca.ca_cert_pem}"
   ca_private_key_pem    = "${module.ca.ca_private_key_pem}"
   ip_addresses_list     = "${concat(digitalocean_droplet.master.*.ipv4_address, digitalocean_droplet.worker.*.ipv4_address)}"
+  dns_names_list        = "kubernetes,kubernetes.default,kubernetes.default.svc"
   docker_daemon_count   = "${var.masters + var.workers}"
   private_key           = "${tls_private_key.ssh.private_key_pem}"
   validity_period_hours = 8760
@@ -81,6 +82,7 @@ module "docker_client_certs" {
   ca_cert_pem           = "${module.ca.ca_cert_pem}"
   ca_private_key_pem    = "${module.ca.ca_private_key_pem}"
   ip_addresses_list     = "${concat(digitalocean_droplet.master.*.ipv4_address, digitalocean_droplet.worker.*.ipv4_address)}"
+  dns_names_list        = "*.*.cluster.internal,*.ec2.internal"
   docker_client_count   = "${var.masters + var.workers}"
   private_key           = "${tls_private_key.ssh.private_key_pem}"
   validity_period_hours = 8760
