@@ -23,7 +23,7 @@ resource "null_resource" "deploy-ca-certs" {
       "echo '${tls_self_signed_cert.ca.cert_pem}' | sudo tee ${var.target_folder}/ca.pem",
       "echo '${tls_private_key.ca.private_key_pem}' | sudo tee ${var.target_folder}/ca-key.pem",
       "sudo chmod 644 ${var.target_folder}/ca.pem",
-      "sudo chmod 644 ${var.target_folder}/ca-key.pem"
+      "sudo chmod 600 ${var.target_folder}/ca-key.pem"
     ]
   }
 }

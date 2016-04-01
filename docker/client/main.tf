@@ -1,6 +1,7 @@
 variable "ca_cert_pem" {}
 variable "ca_private_key_pem" {}
 variable "ip_addresses_list" {}
+variable "dns_names_list" { default = "*.*.cluster.internal,*.ec2.internal" }
 variable "docker_client_count" {}
 variable "private_key" {}
 variable "ca_cert_pem" {}
@@ -22,10 +23,7 @@ resource "tls_cert_request" "docker_client" {
     common_name  = "docker_client_${count.index}"
   }
 
-  dns_names = [
-    "*.*.cluster.internal",
-    "*.ec2.internal", # ec2 only
-  ]
+  dns_names = ["${element(var.dns_names_list, count.index)}"]
   ip_addresses = ["${element(var.ip_addresses_list, count.index)}"]
 }
 

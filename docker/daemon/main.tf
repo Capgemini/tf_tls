@@ -1,6 +1,7 @@
 variable "ca_cert_pem" {}
 variable "ca_private_key_pem" {}
 variable "ip_addresses_list" {}
+variable "dns_names_list" { default = "kubernetes,kubernetes.default,kubernetes.default.svc,kubernetes.default.svc.cluster.local" }
 variable "docker_daemon_count" {}
 variable "private_key" {}
 variable "ca_cert_pem" {}
@@ -22,12 +23,7 @@ resource "tls_cert_request" "docker_daemon" {
     common_name = "docker_daemon"
   }
 
-  dns_names = [
-    "kubernetes",
-    "kubernetes.default",
-    "kubernetes.default.svc",
-    "kubernetes.default.svc.cluster.local"
-  ]
+  dns_names = ["${element(var.dns_names_list, count.index)}"]
   ip_addresses = [
     "127.0.0.1",
     "${element(var.ip_addresses_list, count.index)}"
