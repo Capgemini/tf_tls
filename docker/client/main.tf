@@ -23,7 +23,7 @@ resource "tls_cert_request" "docker_client" {
     common_name  = "docker_client_${count.index}"
   }
 
-  dns_names = ["${element(var.dns_names_list, count.index)}"]
+  dns_names = ["${split(",", var.dns_names_list)}"]
   ip_addresses = ["${element(var.ip_addresses_list, count.index)}"]
 }
 
