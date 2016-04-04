@@ -23,7 +23,7 @@ resource "tls_cert_request" "docker_daemon" {
     common_name = "docker_daemon"
   }
 
-  dns_names = ["${element(var.dns_names_list, count.index)}"]
+  dns_names = ["${split(",", var.dns_names_list)}"]
   ip_addresses = [
     "127.0.0.1",
     "${element(var.ip_addresses_list, count.index)}"
