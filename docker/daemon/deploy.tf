@@ -13,7 +13,7 @@ resource "null_resource" "configure-docker-dameon-certs" {
   connection {
     user         = "${var.user}"
     private_key  = "${var.private_key}"
-    host         = "${element(var.deploy_ip_addresses, count.index)}"
+    host         = "${element(var.deploy_ssh_hosts, count.index)}"
   }
   provisioner "remote-exec" {
     inline = [

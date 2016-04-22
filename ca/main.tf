@@ -7,7 +7,7 @@ variable "ca_count" {}
 variable "ip_addresses_list" {}
 # supports if you have a public/private ip and you want to set the private ip
 # for internal cert but use the public_ip to connect via ssh
-variable "deploy_ip_addresses" {}
+variable "deploy_ssh_hosts" {}
 variable "common_name" { default = "kube-ca" }
 variable "target_folder" { default = "/etc/kubernetes/ssl"}
 variable "user" { default = "core" }

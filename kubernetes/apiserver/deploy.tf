@@ -12,7 +12,7 @@ resource "null_resource" "configure-apiserver-certs" {
   connection {
     user         = "${var.ssh_user}"
     private_key  = "${var.ssh_private_key}"
-    host         = "${element(var.deploy_ip_addresses, count.index)}"
+    host         = "${element(var.deploy_ssh_hosts, count.index)}"
   }
 
   provisioner "remote-exec" {
