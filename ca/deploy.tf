@@ -1,14 +1,13 @@
 resource "null_resource" "deploy-ca-certs" {
-  count      = "${var.ca_count}"
-  # Changes to the number of masters/workers triggers the provisioner again across
-  # all instances.
+  count = "${var.ca_count}"
+
   triggers {
     ca_count              = "${var.ca_count}"
     ca_cert_pem           = "${tls_self_signed_cert.ca.cert_pem}"
     validity_period_hours = "${var.validity_period_hours}"
     early_renewal_hours   = "${var.early_renewal_hours}"
-    ip_addresses_list     = "{$var.ip_addresses_list}"
-    common_name           = "{$var.common_name}"
+    common_name           = "${var.common_name}"
+    organization          = "${var.organization}"
   }
 
   connection {

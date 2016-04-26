@@ -4,7 +4,6 @@ variable "validity_period_hours" { default = 240000 }
 variable "early_renewal_hours" { default = 720 }
 variable "is_ca_certificate" { default = true }
 variable "ca_count" {}
-variable "ip_addresses_list" {}
 # supports if you have a public/private ip and you want to set the private ip
 # for internal cert but use the public_ip to connect via ssh
 variable "deploy_ssh_hosts" {}
