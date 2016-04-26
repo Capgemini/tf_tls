@@ -31,10 +31,7 @@ resource "tls_cert_request" "apiserver" {
     "kubernetes.default.svc",
     "kubernetes.default.svc.cluster.local"
   ]
-  ip_addresses = [
-    "${var.kube_service_ip}",
-    "${element(var.ip_addresses, count.index)}"
-  ]
+  ip_addresses = ["${concat(var.kube_service_ip, var.ip_addresses)}"]
 }
 
 resource "tls_locally_signed_cert" "apiserver" {
