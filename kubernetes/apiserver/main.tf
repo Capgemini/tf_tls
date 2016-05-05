@@ -1,6 +1,7 @@
 variable "ca_cert_pem" {}
 variable "ca_private_key_pem" {}
 variable "ip_addresses" {}
+variable "dns_names" { default = "" }
 # supports if you have a public/private ip and you want to set the private ip
 # for internal cert but use the public_ip to connect via ssh
 variable "deploy_ssh_hosts" {}
@@ -25,12 +26,7 @@ resource "tls_cert_request" "apiserver" {
     common_name = "kube-apiserver"
   }
 
-  dns_names = [
-    "kubernetes",
-    "kubernetes.default",
-    "kubernetes.default.svc",
-    "kubernetes.default.svc.cluster.local"
-  ]
+  dns_names    = ["${compact(var.dns_names)}", "kubernetes", "kubernetes.default", "kubernetes.default.svc", "kubernetes.default.svc.cluster.local"]
   ip_addresses = ["${concat(var.kube_service_ip, var.ip_addresses)}"]
 }
 
