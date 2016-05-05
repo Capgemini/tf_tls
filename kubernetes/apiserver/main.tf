@@ -26,7 +26,7 @@ resource "tls_cert_request" "apiserver" {
     common_name = "kube-apiserver"
   }
 
-  dns_names    = ["${concat(var.dns_names, "kubernetes", "kubernetes.default", "kubernetes.default.svc", "kubernetes.default.svc.cluster.local")}"]
+  dns_names    = ["${compact(var.dns_names)}", "kubernetes", "kubernetes.default", "kubernetes.default.svc", "kubernetes.default.svc.cluster.local"]
   ip_addresses = ["${concat(var.kube_service_ip, var.ip_addresses)}"]
 }
 
