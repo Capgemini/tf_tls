@@ -6,8 +6,9 @@ resource "null_resource" "configure-kubelet-certs" {
     kubelet_count          = "${var.kubelet_count}"
     kubelet_private_key    = "${tls_private_key.kubelet.private_key_pem}"
     kubelet_certs_pem      = "${element(tls_locally_signed_cert.kubelet.*.cert_pem, count.index)}"
-    validity_period_hours = "${var.validity_period_hours}"
-    early_renewal_hours   = "${var.early_renewal_hours}"
+    validity_period_hours  = "${var.validity_period_hours}"
+    early_renewal_hours    = "${var.early_renewal_hours}"
+    ip_addresses           = "${var.ip_addresses}"
   }
 
   connection {
