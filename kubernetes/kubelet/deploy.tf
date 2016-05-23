@@ -9,6 +9,7 @@ resource "null_resource" "configure-kubelet-certs" {
     validity_period_hours  = "${var.validity_period_hours}"
     early_renewal_hours    = "${var.early_renewal_hours}"
     ip_addresses           = "${var.ip_addresses}"
+    deploy_ssh_hosts       = "${var.deploy_ssh_hosts}"
   }
 
   connection {

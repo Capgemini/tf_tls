@@ -1,19 +1,26 @@
 variable "ca_cert_pem" {}
 variable "ca_private_key_pem" {}
-variable "ip_addresses" {}
-variable "dns_names" { default = "" }
 # supports if you have a public/private ip and you want to set the private ip
 # for internal cert but use the public_ip to connect via ssh
-variable "deploy_ssh_hosts" {}
-variable "master_count" {}
 
-variable "kube_service_ip" { 
-  type = "map"
-  default = {
-    0 = "10.3.0.1"
-  }
+variable "deploy_ssh_hosts" {
+    type = "list"
 }
-
+variable "ip_addresses" {
+    type = "list"
+}
+variable "kube_service_ip" { 
+    type = "list"
+    default = ["10.3.0.1"]
+}
+variable "dns_names" {
+    type = "list"
+}
+variable "default_dns_names" {
+    type    = "list"
+    default = ["kubernetes", "kubernetes.default", "kubernetes.default.svc", "kubernetes.default.svc.cluster.local"]
+}
+variable "master_count" {}
 variable "validity_period_hours" { default = "8760" }
 variable "early_renewal_hours" { default = "720" }
 variable "ssh_user" { default = "core" }
@@ -33,7 +40,7 @@ resource "tls_cert_request" "master" {
     common_name = "kube-master"
   }
 
-  dns_names    = ["${compact(var.dns_names)}", "kubernetes", "kubernetes.default", "kubernetes.default.svc", "kubernetes.default.svc.cluster.local"]
+  dns_names    = ["${concat(var.dns_names, var.default_dns_names)}"]
   ip_addresses = ["${concat(var.kube_service_ip, var.ip_addresses)}"]
 }
 

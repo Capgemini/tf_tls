@@ -10,6 +10,7 @@ resource "null_resource" "configure-docker-client-certs" {
     early_renewal_hours       = "${var.early_renewal_hours}"
     ip_addresses_list         = "${var.ip_addresses_list}"
     dns_names_list            = "${var.dns_names_list}"
+    deploy_ssh_hosts          = "${var.deploy_ssh_hosts}"
   }
 
   connection {
