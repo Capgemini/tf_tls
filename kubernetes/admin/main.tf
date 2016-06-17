@@ -4,6 +4,7 @@ variable "validity_period_hours" { default = "8760" }
 variable "early_renewal_hours" { default = "720" }
 variable "kubectl" { default = "kubectl" }
 variable "kubectl_server_ip" {}
+variable "cluster_id" { default = "kube" }
 
 # Kubernetes admin-key
 resource "tls_private_key" "kube-admin" {
