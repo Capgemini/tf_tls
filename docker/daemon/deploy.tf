@@ -19,6 +19,7 @@ resource "null_resource" "configure-docker-dameon-certs" {
   }
   provisioner "remote-exec" {
     inline = [
+      "if [ ! -d '/etc/docker' ]; then sudo mkdir /etc/docker;fi",
       "echo '${var.ca_cert_pem}' | sudo tee /etc/docker/ca.pem",
       "echo '${tls_private_key.docker_daemon.private_key_pem}' | sudo tee /etc/docker/server-key.pem",
       "echo '${element(tls_locally_signed_cert.docker_daemon.*.cert_pem, count.index)}' | sudo tee /etc/docker/server.pem",
