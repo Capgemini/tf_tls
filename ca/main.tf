@@ -1,6 +1,6 @@
 variable "organization" { default = "apollo" }
 # valid for 1000 days
-variable "validity_period_hours" { default = 240000 }
+variable "validity_period_hours" { default = 24000 }
 variable "early_renewal_hours" { default = 720 }
 variable "is_ca_certificate" { default = true }
 variable "ca_count" {}
