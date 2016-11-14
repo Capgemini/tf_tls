@@ -7,7 +7,6 @@ variable "deploy_ssh_hosts" {}
 variable "dns_names_list" { default = "*.*.cluster.internal,*.ec2.internal" }
 variable "docker_client_count" {}
 variable "private_key" {}
-variable "ca_cert_pem" {}
 variable "validity_period_hours" {}
 variable "early_renewal_hours" {}
 variable "user" {}
