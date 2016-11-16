@@ -10,7 +10,7 @@ variable "ip_addresses" {
 }
 variable "kube_service_ip" {
     type = "list"
-    default = "10.3.0.1"
+    default = [ "10.3.0.1" ]
 }
 variable "dns_names" {
     type = "list"
