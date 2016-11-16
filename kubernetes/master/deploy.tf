@@ -7,8 +7,8 @@ resource "null_resource" "configure-master-certs" {
     master_certs_pem      = "${element(tls_locally_signed_cert.master.*.cert_pem, count.index)}"
     validity_period_hours = "${var.validity_period_hours}"
     early_renewal_hours   = "${var.early_renewal_hours}"
-#    dns_names             = "${var.dns_names}"
-#    ip_addresses          = [ "${var.ip_addresses}" ]
+    dns_names             = "${join(",",var.dns_names)}"
+    ip_addresses          = "${join(",",var.ip_addresses)}"
   }
 
   connection {

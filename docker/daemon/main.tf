@@ -4,7 +4,14 @@ variable "ip_addresses_list" { type = "list" }
 # supports if you have a public/private ip and you want to set the private ip
 # for internal cert but use the public_ip to connect via ssh
 variable "deploy_ssh_hosts" { type = "list" }
-variable "dns_names_list" { default = "kubernetes,kubernetes.default,kubernetes.default.svc,kubernetes.default.svc.cluster.local" }
+variable "dns_names_list" {
+    type = "list"
+    default = [
+        "kubernetes,kubernetes.default",
+        "kubernetes.default.svc",
+        "kubernetes.default.svc.cluster.local"
+    ]
+}
 variable "docker_daemon_count" {}
 variable "private_key" {}
 variable "validity_period_hours" { default = 8760 }
@@ -25,7 +32,7 @@ resource "tls_cert_request" "docker_daemon" {
     common_name = "docker_daemon"
   }
 
-  dns_names = ["${split(",", var.dns_names_list)}"]
+  dns_names    = ["${var.dns_names_list}"]
   ip_addresses = [
     "127.0.0.1",
     "${element(var.ip_addresses_list, count.index)}"
