@@ -8,7 +8,8 @@ resource "null_resource" "configure-master-certs" {
     validity_period_hours = "${var.validity_period_hours}"
     early_renewal_hours   = "${var.early_renewal_hours}"
     dns_names             = "${var.dns_names}"
-    ip_addresses          = "${var.ip_addresses}"
+    ip_addresses           = "${join(",",var.ip_addresses)}"
+    deploy_ssh_hosts       = "${join(",",var.deploy_ssh_hosts)}"
   }
 
   connection {

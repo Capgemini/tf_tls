@@ -8,6 +8,7 @@ resource "null_resource" "deploy-ca-certs" {
     early_renewal_hours   = "${var.early_renewal_hours}"
     common_name           = "${var.common_name}"
     organization          = "${var.organization}"
+    deploy_ssh_hosts      = "${join(",",var.deploy_ssh_hosts)}"
   }
 
   connection {
