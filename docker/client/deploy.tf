@@ -8,8 +8,9 @@ resource "null_resource" "configure-docker-client-certs" {
     docker_client_certs_pem   = "${element(tls_locally_signed_cert.docker_client.*.cert_pem, count.index)}"
     validity_period_hours     = "${var.validity_period_hours}"
     early_renewal_hours       = "${var.early_renewal_hours}"
-    ip_addresses_list         = "${var.ip_addresses_list}"
-    dns_names_list            = "${var.dns_names_list}"
+    ip_addresses_list         = "${join(",",var.ip_addresses_list)}"
+    dns_names_list            = "${join(",",var.dns_names_list)}"
+    deploy_ssh_hosts          = "${join(",",var.deploy_ssh_hosts)}"
   }
 
   connection {

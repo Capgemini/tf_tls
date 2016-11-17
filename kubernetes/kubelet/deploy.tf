@@ -8,7 +8,8 @@ resource "null_resource" "configure-kubelet-certs" {
     kubelet_certs_pem      = "${element(tls_locally_signed_cert.kubelet.*.cert_pem, count.index)}"
     validity_period_hours  = "${var.validity_period_hours}"
     early_renewal_hours    = "${var.early_renewal_hours}"
-    ip_addresses           = "${var.ip_addresses}"
+    ip_addresses           = "${join(",",var.ip_addresses)}"
+    deploy_ssh_hosts       = "${join(",",var.deploy_ssh_hosts)}"
   }
 
   connection {
