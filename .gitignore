@@ -1,1 +1,4 @@
 .DS_Store
+kubernetes/admin/admin-key.pem
+kubernetes/admin/admin.pem
+kubernetes/admin/ca.pem
