@@ -14,7 +14,7 @@ Docker daemon:
 
 `ca_private_key_pem` - PEM-encoded private key data for the CA. This can be read from a separate file using the file interpolation function.
 
-`ip_addresses_list` - List of DNS names for which a certificate is being requested.
+`ip_addresses` - List of DNS names for which a certificate is being requested.
 
 `docker_daemon_count` - Number of machines to set up the certificates
 
@@ -36,7 +36,7 @@ module "docker_daemon_certs" {
   source                = "github.com/Capgemini/tf_tls//docker/daemon"
   ca_cert_pem           = "${module.ca.ca_cert_pem}"
   ca_private_key_pem    = "${module.ca.ca_private_key_pem}"
-  ip_addresses_list     = "${concat(digitalocean_droplet.master.*.ipv4_address, digitalocean_droplet.worker.*.ipv4_address)}"
+  ip_addresses          = "${concat(digitalocean_droplet.master.*.ipv4_address, digitalocean_droplet.worker.*.ipv4_address)}"
   docker_daemon_count   = "${var.masters + var.workers}"
   private_key           = "${tls_private_key.ssh.private_key_pem}"
   validity_period_hours = 8760
@@ -48,7 +48,7 @@ module "docker_client_certs" {
   source                = "github.com/Capgemini/tf_tls//docker/client"
   ca_cert_pem           = "${module.ca.ca_cert_pem}"
   ca_private_key_pem    = "${module.ca.ca_private_key_pem}"
-  ip_addresses_list     = "${concat(digitalocean_droplet.master.*.ipv4_address, digitalocean_droplet.worker.*.ipv4_address)}"
+  ip_addresses          = "${concat(digitalocean_droplet.master.*.ipv4_address, digitalocean_droplet.worker.*.ipv4_address)}"
   docker_client_count   = "${var.masters + var.workers}"
   private_key           = "${tls_private_key.ssh.private_key_pem}"
   validity_period_hours = 8760

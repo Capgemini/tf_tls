@@ -1,6 +1,6 @@
 variable "ca_cert_pem" {}
 variable "ca_private_key_pem" {}
-variable "ip_addresses_list" {}
+variable "ip_addresses" {}
 # supports if you have a public/private ip and you want to set the private ip
 # for internal cert but use the public_ip to connect via ssh
 variable "deploy_ssh_hosts" {}
@@ -26,7 +26,7 @@ resource "tls_cert_request" "docker_client" {
   }
 
   dns_names = ["${split(",", var.dns_names_list)}"]
-  ip_addresses = ["${element(var.ip_addresses_list, count.index)}"]
+  ip_addresses = ["${element(var.ip_addresses, count.index)}"]
 }
 
 resource "tls_locally_signed_cert" "docker_client" {

@@ -17,7 +17,7 @@ Input Variables
 
 `ca_count` - Number of servers to upload the CA.
 
-`ip_addresses_list` - Host list to upload the CA.
+`ip_addresses` - Host list to upload the CA.
 
 `ssh_user` - User to ssh into the hosts.
 
@@ -40,7 +40,7 @@ module "ca" {
   common_name           = "kube-ca"
   organization          = "Apollo"
   ca_count          	= "${var.masters + var.workers}"
-  ip_addresses_list     = "${concat(digitalocean_droplet.master.*.ipv4_address, digitalocean_droplet.worker.*.ipv4_address)}"
+  ip_addresses          = "${concat(digitalocean_droplet.master.*.ipv4_address, digitalocean_droplet.worker.*.ipv4_address)}"
   ssh_private_key       = "${tls_private_key.ssh.private_key_pem}"
 }
 ```
